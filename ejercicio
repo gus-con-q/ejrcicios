@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolución de Ejercicios JavaScript</title>
+    <!-- Tailwind CSS CDN para un diseño limpio y moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía e Importación de fuentes */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        /* Gradientes estilo Instagram */
+        .instagram-gradient {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .instagram-text-gradient {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .instagram-border-gradient {
+            border-image: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) 1;
+        }
+
+        /* Pestaña activa */
+        .tab-btn.active {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
+        }
+
+        .card-glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="instagram-gradient p-6 text-center shadow-lg">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-wide uppercase">
+            Resolución de Ejercicios JavaScript
+        </h1>
+        <p id="header-subtitle" class="text-white/90 text-sm sm:text-base mt-2 font-medium">
+            Selecciona un ejercicio en la barra de navegación para comenzar
+        </p>
+    </header>
+
+    <!-- NAV (NAVEGACIÓN DE PESTAÑAS) -->
+    <nav class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-2 py-3">
+                <button onclick="showTab('camellos')" id="btn-camellos" class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm transition-all duration-200 hover:bg-slate-800 text-slate-300">
+                    1. Los Camellos
+                </button>
+                <button onclick="showTab('panes')" id="btn-panes" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm transition-all duration-200 hover:bg-slate-800 text-slate-300">
+                    2. Los Panes
+                </button>
+                <button onclick="showTab('ej12')" id="btn-ej12" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm transition-all duration-200 hover:bg-slate-800 text-slate-300">
+                    3. Ejercicio 12 (Ecuación Cuadrática)
+                </button>
+                <button onclick="showTab('ej13')" id="btn-ej13" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm transition-all duration-200 hover:bg-slate-800 text-slate-300">
+                    4. Ejercicio 13 (Aproximación Pi)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-5xl mx-auto p-4 sm:p-6 w-full flex-grow">
+
+        <!-- ================= SECCIÓN 1: CAMELLOS ================= -->
+        <section id="sec-camellos" class="tab-content block">
+            <div class="card-glass rounded-2xl p-6 sm:p-8 mb-6 shadow-xl">
+                <h2 class="text-2xl font-bold instagram-text-gradient mb-4">Problema de los 35 Camellos (El Hombre que Calculaba)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 mb-6">
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📖 Descripción del Problema</h3>
+                        <p class="leading-relaxed">
+                            Tres hermanos heredan 35 camellos. El mayor debe recibir la mitad (1/2), el segundo la tercera parte (1/3) y el menor la novena parte (1/9). Al no ser 35 divisible de forma exacta, Beremiz Samir suma 1 camello prestado (total 36) para solucionar el problema devolviendo números enteros y dejando una ganancia limpia.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">⚙️ Algoritmo</h3>
+                        <ol class="list-decimal list-inside space-y-1">
+                            <li>Obtener la cantidad inicial de camellos <code class="text-pink-400">N</code>.</li>
+                            <li>Añadir 1 camello prestado: <code class="text-pink-400">Total = N + 1</code>.</li>
+                            <li>Calcular hermano 1: <code class="text-pink-400">Math.floor(Total / 2)</code>.</li>
+                            <li>Calcular hermano 2: <code class="text-pink-400">Math.floor(Total / 3)</code>.</li>
+                            <li>Calcular hermano 3: <code class="text-pink-400">Math.floor(Total / 9)</code>.</li>
+                            <li>Calcular sobrante/recompensa para Beremiz.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📥 Entrada</h3>
+                        <p>Número total inicial de camellos (Ejemplo por defecto: 35).</p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📤 Salida Deseada</h3>
+                        <p>Cantidad de camellos enteros para cada uno de los 3 hermanos y camellos sobrantes para Beremiz.</p>
+                    </div>
+                </div>
+
+                <!-- Formulario Interactivo -->
+                <div class="bg-slate-900/80 p-6 rounded-xl border border-pink-500/30">
+                    <h3 class="text-lg font-bold text-white mb-4">Ejecución interactiva con DOM</h3>
+                    <div class="flex flex-col sm:flex-row gap-4 items-end mb-4">
+                        <div class="w-full">
+                            <label for="camellos-input" class="block text-xs font-semibold uppercase text-slate-400 mb-1">Cantidad de camellos:</label>
+                            <input type="number" id="camellos-input" value="35" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                        <button onclick="resolverCamellos()" class="w-full sm:w-auto instagram-gradient px-6 py-2.5 rounded-lg text-white font-bold hover:opacity-90 transition">
+                            Calcular
+                        </button>
+                    </div>
+                    <div id="out-camellos" class="hidden p-4 rounded-lg bg-slate-800 border border-slate-700 text-sm"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 2: PANES ================= -->
+        <section id="sec-panes" class="tab-content hidden">
+            <div class="card-glass rounded-2xl p-6 sm:p-8 mb-6 shadow-xl">
+                <h2 class="text-2xl font-bold instagram-text-gradient mb-4">Problema de los Panes (El Hombre que Calculaba)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 mb-6">
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📖 Descripción del Problema</h3>
+                        <p class="leading-relaxed">
+                            Beremiz (5 panes) y su amigo (3 panes) comparten sus 8 panes equitativamente con un jeque rico hambriento. El jeque paga 8 monedas de oro. La división justa no es 5 y 3, sino calcular cuántos trozos dio cada uno exactamente al jeque.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">⚙️ Algoritmo</h3>
+                        <ol class="list-decimal list-inside space-y-1">
+                            <li>Convertir los panes a trozos (multiplicar por 3 cada pan).</li>
+                            <li>Calcular el consumo equitativo por persona: <code class="text-pink-400">TotalTrozos / 3</code>.</li>
+                            <li>Calcular trozos cedidos al jeque por persona.</li>
+                            <li>Calcular reparto de monedas proporcional en enteros (<code class="text-pink-400">Math.floor</code>).</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📥 Entrada</h3>
+                        <p>Panes de Beremiz (5), panes del compañero (3) y total de monedas (8).</p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📤 Salida Deseada</h3>
+                        <p>Monedas de oro exactas (enteros) correspondientes a cada persona.</p>
+                    </div>
+                </div>
+
+                <!-- Formulario Interactivo -->
+                <div class="bg-slate-900/80 p-6 rounded-xl border border-pink-500/30">
+                    <h3 class="text-lg font-bold text-white mb-4">Ejecución interactiva con DOM</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="panes-a" class="block text-xs font-semibold uppercase text-slate-400 mb-1">Panes Beremiz:</label>
+                            <input type="number" id="panes-a" value="5" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="panes-b" class="block text-xs font-semibold uppercase text-slate-400 mb-1">Panes Compañero:</label>
+                            <input type="number" id="panes-b" value="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="panes-m" class="block text-xs font-semibold uppercase text-slate-400 mb-1">Monedas:</label>
+                            <input type="number" id="panes-m" value="8" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+                    <button onclick="resolverPanes()" class="w-full instagram-gradient px-6 py-2.5 rounded-lg text-white font-bold hover:opacity-90 transition mb-4">
+                        Calcular Reparto de Monedas
+                    </button>
+                    <div id="out-panes" class="hidden p-4 rounded-lg bg-slate-800 border border-slate-700 text-sm"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 3: EJERCICIO 12 ================= -->
+        <section id="sec-ej12" class="tab-content hidden">
+            <div class="card-glass rounded-2xl p-6 sm:p-8 mb-6 shadow-xl">
+                <h2 class="text-2xl font-bold instagram-text-gradient mb-4">Ejercicio 12: Raíces de una Ecuación Cuadrática</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 mb-6">
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📖 Descripción del Problema</h3>
+                        <p class="leading-relaxed">
+                            Programa que determina las raíces reales de la ecuación cuadrática <code class="text-pink-400">ax² + bx + c = 0</code> calculando el discriminante <code class="text-pink-400">D = b² - 4ac</code>.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">⚙️ Algoritmo</h3>
+                        <ol class="list-decimal list-inside space-y-1">
+                            <li>Leer los coeficientes <code class="text-pink-400">a, b, c</code>.</li>
+                            <li>Calcular <code class="text-pink-400">D = b² - 4ac</code>.</li>
+                            <li>Si <code class="text-pink-400">D > 0</code>: "La ecuación tiene dos raíces".</li>
+                            <li>Si <code class="text-pink-400">D = 0</code>: "La ecuación tiene una raíz".</li>
+                            <li>Si <code class="text-pink-400">D &lt; 0</code>: "La ecuación no tiene raíces reales".</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📥 Entrada</h3>
+                        <p>Valores numéricos de los coeficientes <strong>a</strong>, <strong>b</strong> y <strong>c</strong>.</p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📤 Salida Deseada</h3>
+                        <p>Mensaje descriptivo según el valor del discriminante D y las raíces numéricas correspondientes.</p>
+                    </div>
+                </div>
+
+                <!-- Formulario Interactivo -->
+                <div class="bg-slate-900/80 p-6 rounded-xl border border-pink-500/30">
+                    <h3 class="text-lg font-bold text-white mb-2">Ejecución interactiva con DOM</h3>
+                    <p class="text-xs text-slate-400 mb-4">Casos de prueba predefinidos de la imagen:</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button onclick="cargarCasoEj12(3, 6, 3)" class="bg-slate-800 hover:bg-slate-700 text-xs px-3 py-1.5 rounded border border-slate-600">Caso (a): 3x² + 6x + 3 = 0</button>
+                        <button onclick="cargarCasoEj12(-3, 4, -6)" class="bg-slate-800 hover:bg-slate-700 text-xs px-3 py-1.5 rounded border border-slate-600">Caso (b): -3x² + 4x - 6 = 0</button>
+                        <button onclick="cargarCasoEj12(-3, 7, 5)" class="bg-slate-800 hover:bg-slate-700 text-xs px-3 py-1.5 rounded border border-slate-600">Caso (c): -3x² + 7x + 5 = 0</button>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="eq-a" class="block text-xs font-semibold uppercase text-slate-400 mb-1">Coeficiente a:</label>
+                            <input type="number" id="eq-a" value="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="eq-b" class="block text-xs font-semibold uppercase text-slate-400 mb-1">Coeficiente b:</label>
+                            <input type="number" id="eq-b" value="6" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                        <div>
+                            <label for="eq-c" class="block text-xs font-semibold uppercase text-slate-400 mb-1">Coeficiente c:</label>
+                            <input type="number" id="eq-c" value="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500">
+                        </div>
+                    </div>
+                    <button onclick="resolverCuadratica()" class="w-full instagram-gradient px-6 py-2.5 rounded-lg text-white font-bold hover:opacity-90 transition mb-4">
+                        Calcular Raíces
+                    </button>
+                    <div id="out-ej12" class="hidden p-4 rounded-lg bg-slate-800 border border-slate-700 text-sm"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN 4: EJERCICIO 13 ================= -->
+        <section id="sec-ej13" class="tab-content hidden">
+            <div class="card-glass rounded-2xl p-6 sm:p-8 mb-6 shadow-xl">
+                <h2 class="text-2xl font-bold instagram-text-gradient mb-4">Ejercicio 13: Estimación del valor de Pi (π)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 mb-6">
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📖 Descripción del Problema</h3>
+                        <p class="leading-relaxed">
+                            Estimar el valor de π mediante la fórmula de sumatoria usando bucles <code class="text-pink-400">for</code>:
+                            <br><span class="text-amber-300 font-semibold">π ≈ ∜ ( 6 * Σ (1 / n²) )</span>
+                            <br>Evaluando para valores de N hasta <strong>1,000,000 (1 millón)</strong> para observar la convergencia paso a paso.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">⚙️ Algoritmo</h3>
+                        <ol class="list-decimal list-inside space-y-1">
+                            <li>Inicializar suma <code class="text-pink-400">S = 0</code>.</li>
+                            <li>Ejecutar bucle desde <code class="text-pink-400">n = 1</code> hasta <code class="text-pink-400">N</code> acumulando <code class="text-pink-400">1 / (n * n)</code>.</li>
+                            <li>Calcular estimación: <code class="text-pink-400">Math.pow(6 * S, 0.25)</code>.</li>
+                            <li>Comparar con la constante estándar <code class="text-pink-400">Math.PI</code>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📥 Entrada</h3>
+                        <p>Valor límite de iteraciones N (por defecto: 100, 1,000, 10,000, 100,000, 1,000,000).</p>
+                    </div>
+
+                    <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/50">
+                        <h3 class="font-bold text-slate-100 text-base mb-2 border-b border-slate-700 pb-1">📤 Salida Deseada</h3>
+                        <p>Valor aproximado de Pi, valor exacto de Math.PI y margen de error absoluto/diferencia.</p>
+                    </div>
+                </div>
+
+                <!-- Formulario Interactivo -->
+                <div class="bg-slate-900/80 p-6 rounded-xl border border-pink-500/30">
+                    <h3 class="text-lg font-bold text-white mb-2">Ejecución interactiva con DOM</h3>
+                    <p class="text-xs text-slate-400 mb-4">Calcula la tabla comparativa completa incluyendo 1 Millón de iteraciones:</p>
+                    
+                    <button onclick="calcularPiCompleto()" class="w-full instagram-gradient px-6 py-3 rounded-lg text-white font-bold hover:opacity-90 transition mb-6 shadow-lg">
+                        🚀 Calcular Tabla de Aproximaciones de PI (hasta N = 1,000,000)
+                    </button>
+
+                    <div id="out-ej13" class="hidden overflow-x-auto"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-400">
+        <p class="font-medium">Todos los derechos reservados &copy; 2026</p>
+    </footer>
+
+    <!-- SCRIPT JAVASCRIPT CON COMANDOS BÁSICOS Y MANIPULACIÓN DEL DOM -->
+    <script>
+        // -------------------------------------------------------------
+        // CONTROL DE PESTAÑAS (NAV) Y SUBTÍTULOS DINÁMICOS
+        // -------------------------------------------------------------
+        function showTab(tabId) {
+            // Ocultar todas las secciones
+            let contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.add("hidden");
+                contents[i].classList.remove("block");
+            }
+
+            // Desactivar estilo activo de todos los botones
+            let buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            // Mostrar sección seleccionada y activar botón
+            document.getElementById("sec-" + tabId).classList.remove("hidden");
+            document.getElementById("sec-" + tabId).classList.add("block");
+            document.getElementById("btn-" + tabId).classList.add("active");
+
+            // Actualizar subtítulo del header
+            let subtitle = document.getElementById("header-subtitle");
+            if (tabId === 'camellos') subtitle.innerHTML = "Ejercicio 1: Reparto Inteligente de Camellos (Capítulo III)";
+            if (tabId === 'panes') subtitle.innerHTML = "Ejercicio 2: Distribución Justa de Monedas de Oro (Capítulo IV)";
+            if (tabId === 'ej12') subtitle.innerHTML = "Ejercicio 12: Cálculo de Raíces Cuadráticas con Discriminante D";
+            if (tabId === 'ej13') subtitle.innerHTML = "Ejercicio 13: Estimación Matemática de Pi (π) hasta N = 1,000,000";
+        }
+
+        // -------------------------------------------------------------
+        // EJERCICIO 1: PROBLEMA DE LOS CAMELLOS
+        // -------------------------------------------------------------
+        function resolverCamellos() {
+            let input = document.getElementById("camellos-input").value;
+            let n = parseInt(input);
+
+            let out = document.getElementById("out-camellos");
+            out.classList.remove("hidden");
+
+            if (isNaN(n) || n <= 0) {
+                out.innerHTML = "<span class='text-red-400'>Por favor, ingrese un número entero válido.</span>";
+                return;
+            }
+
+            // Algoritmo: Sumamos 1 camello prestado
+            let total = n + 1;
+            let h1 = Math.floor(total / 2);
+            let h2 = Math.floor(total / 3);
+            let h3 = Math.floor(total / 9);
+
+            let repartido = h1 + h2 + h3;
+            let sobra = total - repartido;
+
+            out.innerHTML = `
+                <p class="text-pink-400 font-bold mb-2">Resultados para N = ${n} camellos (Total con prestado = ${total}):</p>
+                <ul class="list-disc list-inside space-y-1 text-slate-200">
+                    <li><strong>1er Hermano (Mitad):</strong> ${h1} camellos</li>
+                    <li><strong>2do Hermano (Tercera parte):</strong> ${h2} camellos</li>
+                    <li><strong>3er Hermano (Novena parte):</strong> ${h3} camellos</li>
+                    <li><strong>Total repartido a hermanos:</strong> ${repartido} camellos</li>
+                    <li class="text-amber-300 font-bold"><strong>Ganancia / Sobrante para Beremiz:</strong> ${sobra} camello(s)</li>
+                </ul>
+            `;
+        }
+
+        // -------------------------------------------------------------
+        // EJERCICIO 2: PROBLEMA DE LOS PANES
+        // -------------------------------------------------------------
+        function resolverPanes() {
+            let pA = parseInt(document.getElementById("panes-a").value);
+            let pB = parseInt(document.getElementById("panes-b").value);
+            let m = parseInt(document.getElementById("panes-m").value);
+
+            let out = document.getElementById("out-panes");
+            out.classList.remove("hidden");
+
+            if (isNaN(pA) || isNaN(pB) || isNaN(m)) {
+                out.innerHTML = "<span class='text-red-400'>Por favor, llene todos los campos con valores correctos.</span>";
+                return;
+            }
+
+            // Cada pan se divide en 3 trozos
+            let trozosA = pA * 3;
+            let trozosB = pB * 3;
+            let totalTrozos = trozosA + trozosB;
+
+            // Consumo equitativo entre las 3 personas
+            let consumo = totalTrozos / 3;
+
+            // Trozos cedidos al jeque
+            let aporteA = trozosA - consumo;
+            let aporteB = trozosB - consumo;
+            let totalAporte = aporteA + aporteB;
+
+            let m1 = 0;
+            let m2 = 0;
+
+            if (totalAporte > 0) {
+                m1 = Math.floor((aporteA * m) / totalAporte);
+                m2 = Math.floor((aporteB * m) / totalAporte);
+            }
+
+            if (m1 < 0) m1 = 0;
+            if (m2 < 0) m2 = 0;
+
+            out.innerHTML = `
+                <p class="text-pink-400 font-bold mb-2">Desglose de reparto justo:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-200">
+                    <div>
+                        <p><strong>Total trozos:</strong> ${totalTrozos}</p>
+                        <p><strong>Consumo por persona:</strong> ${Math.floor(consumo)} trozos</p>
+                    </div>
+                    <div>
+                        <p><strong>Aporte de Beremiz al jeque:</strong> ${Math.floor(aporteA)} trozos</p>
+                        <p><strong>Aporte del compañero:</strong> ${Math.floor(aporteB)} trozos</p>
+                    </div>
+                </div>
+                <hr class="my-3 border-slate-700">
+                <p class="text-amber-300 font-bold text-base">
+                    💰 Beremiz recibe: ${m1} monedas de oro <br>
+                    💰 Compañero recibe: ${m2} monedas de oro
+                </p>
+            `;
+        }
+
+        // -------------------------------------------------------------
+        // EJERCICIO 12: ECUACIÓN CUADRÁTICA
+        // -------------------------------------------------------------
+        function cargarCasoEj12(a, b, c) {
+            document.getElementById("eq-a").value = a;
+            document.getElementById("eq-b").value = b;
+            document.getElementById("eq-c").value = c;
+            resolverCuadratica();
+        }
+
+        function resolverCuadratica() {
+            let a = parseFloat(document.getElementById("eq-a").value);
+            let b = parseFloat(document.getElementById("eq-b").value);
+            let c = parseFloat(document.getElementById("eq-c").value);
+
+            let out = document.getElementById("out-ej12");
+            out.classList.remove("hidden");
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                out.innerHTML = "<span class='text-red-400'>Ingrese coeficientes válidos.</span>";
+                return;
+            }
+
+            if (a === 0) {
+                out.innerHTML = "<span class='text-red-400'>El coeficiente 'a' no puede ser 0 en una ecuación cuadrática.</span>";
+                return;
+            }
+
+            // Discriminante D = b² - 4ac
+            let D = (b * b) - (4 * a * c);
+            let htmlResult = `<p class="font-mono text-slate-300 mb-2">Ecuación: <b>${a}x² + ${b}x + ${c} = 0</b> | Discriminante (D) = <b>${D}</b></p>`;
+
+            if (D > 0) {
+                let x1 = (-b + Math.sqrt(D)) / (2 * a);
+                let x2 = (-b - Math.sqrt(D)) / (2 * a);
+                htmlResult += `
+                    <p class="text-green-400 font-bold mb-1">The equation has two roots</p>
+                    <p class="text-slate-200">Root 1 (x₁): <b>${x1.toFixed(4)}</b></p>
+                    <p class="text-slate-200">Root 2 (x₂): <b>${x2.toFixed(4)}</b></p>
+                `;
+            } else if (D === 0) {
+                let x = -b / (2 * a);
+                htmlResult += `
+                    <p class="text-yellow-400 font-bold mb-1">The equation has one root</p>
+                    <p class="text-slate-200">Root (x): <b>${x.toFixed(4)}</b></p>
+                `;
+            } else {
+                htmlResult += `
+                    <p class="text-pink-500 font-bold">The equation has no real roots</p>
+                `;
+            }
+
+            out.innerHTML = htmlResult;
+        }
+
+        // -------------------------------------------------------------
+        // EJERCICIO 13: ESTIMACIÓN DE PI CON 1 MILLÓN DE ITERACIONES
+        // -------------------------------------------------------------
+        function estimarPiParaN(limit) {
+            let suma = 0;
+            for (let n = 1; n <= limit; n++) {
+                suma += 1 / (n * n);
+            }
+            // Fórmula: π ≈ ∜(6 * suma)
+            return Math.pow(6 * suma, 0.25);
+        }
+
+        function calcularPiCompleto() {
+            let out = document.getElementById("out-ej13");
+            out.classList.remove("hidden");
+
+            let valoresN = [100, 1000, 10000, 100000, 1000000];
+            let piReal = Math.PI;
+
+            let tablaHTML = `
+                <table class="w-full text-left text-xs sm:text-sm text-slate-200 border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800 text-pink-400 border-b border-slate-700">
+                            <th class="p-3">Valor de N</th>
+                            <th class="p-3">Valor Estimado de π</th>
+                            <th class="p-3">Valor Real (Math.PI)</th>
+                            <th class="p-3">Diferencia / Error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            for (let i = 0; i < valoresN.length; i++) {
+                let currentN = valoresN[i];
+                let piEst = estimarPiParaN(currentN);
+                let diff = Math.abs(piReal - piEst);
+
+                tablaHTML += `
+                    <tr class="border-b border-slate-800 hover:bg-slate-800/40">
+                        <td class="p-3 font-bold text-amber-300">${currentN.toLocaleString()}</td>
+                        <td class="p-3 font-mono text-pink-300">${piEst.toFixed(10)}</td>
+                        <td class="p-3 font-mono text-slate-400">${piReal.toFixed(10)}</td>
+                        <td class="p-3 font-mono text-emerald-400">${diff.toExponential(4)}</td>
+                    </tr>
+                `;
+            }
+
+            tablaHTML += `
+                    </tbody>
+                </table>
+                <p class="text-xs text-slate-400 mt-3">
+                    <b>Nota:</b> Se puede observar cómo a medida que N se aproxima a 1,000,000 (1 Millón), el resultado converge significativamente hacia Math.PI.
+                </p>
+            `;
+
+            out.innerHTML = tablaHTML;
+        }
+
+        // Ejecutar por defecto la inicialización de subtítulo
+        showTab('camellos');
+    </script>
+</body>
+</html>
